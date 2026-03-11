@@ -1,17 +1,17 @@
-# proxer-mcp
+# surro-mcp
 
-[![PyPI version](https://img.shields.io/pypi/v/proxer-mcp)](https://pypi.org/project/proxer-mcp/)
+[![PyPI version](https://img.shields.io/pypi/v/surro-mcp)](https://pypi.org/project/surro-mcp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **The trust layer for AI agents.** Gates protect your tools. Passports authorize your agents. Everything verified locally.
 
-Python client for the [Proxer](https://proxer.dev) REST API. Manage gates, passports, attestations, constraints, catalogs, enforcement, commerce, and billing programmatically.
+Python client for the [Surro](https://surro.io) REST API. Manage gates, passports, attestations, constraints, catalogs, enforcement, commerce, and billing programmatically.
 
 ---
 
-## What is Proxer?
+## What is Surro?
 
-[Proxer](https://proxer.dev) is an open protocol that adds a lightweight trust layer for the agentic web. It has two sides:
+[Surro](https://surro.io) is an open protocol that adds a lightweight trust layer for the agentic web. It has two sides:
 
 **Gates** protect your tools, APIs, and MCP servers. A Gate is a verification checkpoint — you define a permission catalog of what's allowed, and incoming agent requests are checked against it locally, with no network round-trip. Every decision produces a signed attestation for a tamper-evident audit trail.
 
@@ -23,7 +23,7 @@ This SDK lets you manage both sides — gates, passports, attestations, constrai
 
 ## Prerequisites
 
-- A **Proxer account** — sign up at the [Proxer Dashboard](https://proxer.dev)
+- A **Surro account** — sign up at the [Surro Dashboard](https://surro.io)
 - An **API key** — generate one from the dashboard
 - **Python 3.9+**
 
@@ -32,7 +32,7 @@ This SDK lets you manage both sides — gates, passports, attestations, constrai
 ## Installation
 
 ```bash
-pip install proxer-mcp
+pip install surro-mcp
 ```
 
 ---
@@ -40,9 +40,9 @@ pip install proxer-mcp
 ## Quick Start
 
 ```python
-from proxer import ProxerClient
+from surro import SurroClient
 
-client = ProxerClient(api_key="uni_live_xxxxxxxx")
+client = SurroClient(api_key="uni_live_xxxxxxxx")
 
 # Create a gate
 gate = client.create_gate(name="My Service", gate_id="gate_my-service")
@@ -79,10 +79,10 @@ client.close()
 
 ```python
 import asyncio
-from proxer import AsyncProxerClient
+from surro import AsyncSurroClient
 
 async def main():
-    async with AsyncProxerClient(api_key="uni_live_xxxxxxxx") as client:
+    async with AsyncSurroClient(api_key="uni_live_xxxxxxxx") as client:
         gates = await client.list_gates()
         print(f"Found {len(gates)} gates")
 
@@ -98,7 +98,7 @@ asyncio.run(main())
 Both clients support context managers for automatic cleanup:
 
 ```python
-with ProxerClient(api_key="uni_live_xxxxxxxx") as client:
+with SurroClient(api_key="uni_live_xxxxxxxx") as client:
     gates = client.list_gates()
 ```
 
@@ -225,7 +225,7 @@ client.revoke_api_key("key_xxx")
 The SDK includes local verification utilities for Ed25519 signatures and RFC 8785 content hashing:
 
 ```python
-from proxer import verify_attestation_signature, verify_content_hash, compute_content_hash
+from surro import verify_attestation_signature, verify_content_hash, compute_content_hash
 
 # Verify an attestation signature locally
 valid = verify_attestation_signature(
@@ -248,8 +248,8 @@ hash_hex = compute_content_hash({"key": "value"})
 All API errors are raised as typed exceptions:
 
 ```python
-from proxer import (
-    ProxerError,
+from surro import (
+    SurroError,
     AuthenticationError,
     AuthorizationError,
     NotFoundError,
@@ -265,7 +265,7 @@ except NotFoundError as e:
     print(f"Status: {e.status_code}")  # 404
 except RateLimitError as e:
     print(f"Rate limited, retry after: {e.retry_after}s")
-except ProxerError as e:
+except SurroError as e:
     print(f"API error: {e} (HTTP {e.status_code})")
 ```
 
@@ -277,7 +277,7 @@ except ProxerError as e:
 | `ConflictError` | 409 |
 | `ValidationError` | 400, 422 |
 | `RateLimitError` | 429 |
-| `ProxerError` | All other errors |
+| `SurroError` | All other errors |
 
 ---
 
@@ -285,13 +285,13 @@ except ProxerError as e:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `PROXER_API_KEY` | Yes | — | Your Proxer API key (`uni_live_*` or `uni_test_*`) |
-| `PROXER_API_URL` | No | `https://proxer.dev` | API base URL (override for local dev) |
+| `SURRO_API_KEY` | Yes | — | Your Surro API key (`uni_live_*` or `uni_test_*`) |
+| `SURRO_API_URL` | No | `https://surro.io` | API base URL (override for local dev) |
 
 You can also pass these directly to the client:
 
 ```python
-client = ProxerClient(api_key="uni_live_xxx", base_url="http://localhost:3000")
+client = SurroClient(api_key="uni_live_xxx", base_url="http://localhost:3000")
 ```
 
 ---
@@ -301,7 +301,7 @@ client = ProxerClient(api_key="uni_live_xxx", base_url="http://localhost:3000")
 To test against a local development dashboard:
 
 ```python
-client = ProxerClient(
+client = SurroClient(
     api_key="uni_test_xxxxxxxx",
     base_url="http://localhost:3000",
 )
@@ -310,8 +310,8 @@ client = ProxerClient(
 To install the SDK in editable mode from source:
 
 ```bash
-git clone https://github.com/StandardLogic/proxer-mcp.git
-cd proxer-mcp/python
+git clone https://github.com/StandardLogic/surro-mcp.git
+cd surro-mcp/python
 pip install -e ".[dev]"
 ```
 
@@ -319,12 +319,12 @@ pip install -e ".[dev]"
 
 ## Learn More
 
-- [Proxer Dashboard](https://proxer.dev) — Create your account and manage gates, passports, and API keys
-- [Documentation & Guides](https://proxer.dev)
+- [Surro Dashboard](https://surro.io) — Create your account and manage gates, passports, and API keys
+- [Documentation & Guides](https://surro.io)
 - [Protocol Specification](https://github.com/uniplexprotocol/uniplex)
-- [MCP SDK (TypeScript)](https://www.npmjs.com/package/proxer-mcp-sdk) · [MCP SDK (Python)](https://pypi.org/project/proxer-mcp-sdk/)
-- [Management MCP Server (TypeScript)](https://www.npmjs.com/package/proxer-mcp)
-- [Discussions](https://github.com/StandardLogic/proxer-mcp/discussions) — Questions and ideas
+- [MCP SDK (TypeScript)](https://www.npmjs.com/package/surro-mcp-sdk) · [MCP SDK (Python)](https://pypi.org/project/surro-mcp-sdk/)
+- [Management MCP Server (TypeScript)](https://www.npmjs.com/package/surro-mcp)
+- [Discussions](https://github.com/StandardLogic/surro-mcp/discussions) — Questions and ideas
 
 ---
 

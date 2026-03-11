@@ -1,4 +1,4 @@
-"""Comprehensive tests for the asynchronous AsyncProxerClient."""
+"""Comprehensive tests for the asynchronous AsyncSurroClient."""
 
 import json
 
@@ -6,18 +6,18 @@ import httpx
 import pytest
 import respx
 
-from proxer.async_client import AsyncProxerClient
-from proxer.exceptions import (
+from surro.async_client import AsyncSurroClient
+from surro.exceptions import (
     AuthenticationError,
     AuthorizationError,
     ConflictError,
     NotFoundError,
     RateLimitError,
-    ProxerError,
+    SurroError,
     ValidationError,
 )
 
-BASE_URL = "https://proxer.dev"
+BASE_URL = "https://surro.io"
 API_KEY = "uni_test_xxx"
 
 pytestmark = pytest.mark.asyncio
@@ -940,7 +940,7 @@ class TestErrorHandling:
         mock_api.get("/api/gates").mock(
             return_value=httpx.Response(500, json={"message": "Internal error"})
         )
-        with pytest.raises(ProxerError) as exc_info:
+        with pytest.raises(SurroError) as exc_info:
             await async_client.list_gates()
         assert exc_info.value.status_code == 500
 
@@ -957,7 +957,7 @@ class TestErrorHandling:
         mock_api.get("/api/gates").mock(
             return_value=httpx.Response(502, text="Bad Gateway")
         )
-        with pytest.raises(ProxerError) as exc_info:
+        with pytest.raises(SurroError) as exc_info:
             await async_client.list_gates()
         assert exc_info.value.status_code == 502
 
@@ -979,6 +979,6 @@ class TestContextManager:
         mock_api.get("/api/gates").mock(
             return_value=httpx.Response(200, json=[])
         )
-        async with AsyncProxerClient(api_key=API_KEY, base_url=BASE_URL) as client:
+        async with AsyncSurroClient(api_key=API_KEY, base_url=BASE_URL) as client:
             result = await client.list_gates()
             assert result == []

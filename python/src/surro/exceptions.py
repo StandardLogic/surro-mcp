@@ -1,12 +1,12 @@
-"""Typed exceptions for the Proxer SDK."""
+"""Typed exceptions for the Surro SDK."""
 
 from __future__ import annotations
 
 from typing import Any, Optional
 
 
-class ProxerError(Exception):
-    """Base exception for all Proxer SDK errors."""
+class SurroError(Exception):
+    """Base exception for all Surro SDK errors."""
 
     def __init__(
         self,
@@ -19,19 +19,19 @@ class ProxerError(Exception):
         self.body = body
 
 
-class AuthenticationError(ProxerError):
+class AuthenticationError(SurroError):
     """Raised when the API key is invalid or missing (HTTP 401)."""
 
 
-class AuthorizationError(ProxerError):
+class AuthorizationError(SurroError):
     """Raised when the API key lacks required scopes (HTTP 403)."""
 
 
-class NotFoundError(ProxerError):
+class NotFoundError(SurroError):
     """Raised when the requested resource does not exist (HTTP 404)."""
 
 
-class RateLimitError(ProxerError):
+class RateLimitError(SurroError):
     """Raised when rate limits are exceeded (HTTP 429)."""
 
     def __init__(
@@ -44,9 +44,9 @@ class RateLimitError(ProxerError):
         self.retry_after = retry_after
 
 
-class ValidationError(ProxerError):
+class ValidationError(SurroError):
     """Raised when request parameters fail validation (HTTP 400/422)."""
 
 
-class ConflictError(ProxerError):
+class ConflictError(SurroError):
     """Raised on resource conflicts like duplicate nonces (HTTP 409)."""

@@ -1,7 +1,7 @@
-"""Proxer Python SDK — trust infrastructure for AI agents."""
+"""Surro Python SDK — trust infrastructure for AI agents."""
 
-from .async_client import AsyncProxerClient
-from .client import ProxerClient
+from .async_client import AsyncSurroClient
+from .client import SurroClient
 from .crypto import (
     compute_content_hash,
     verify_attestation_signature,
@@ -13,7 +13,7 @@ from .exceptions import (
     AuthorizationError,
     ConflictError,
     NotFoundError,
-    ProxerError,
+    SurroError,
     RateLimitError,
     ValidationError,
 )
@@ -54,10 +54,10 @@ from .types import (
 
 __all__ = [
     # Clients
-    "ProxerClient",
-    "AsyncProxerClient",
+    "SurroClient",
+    "AsyncSurroClient",
     # Exceptions
-    "ProxerError",
+    "SurroError",
     "AuthenticationError",
     "AuthorizationError",
     "NotFoundError",

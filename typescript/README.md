@@ -1,20 +1,20 @@
-# proxer-mcp
+# surro-mcp
 
-<!-- mcp-name: io.github.standardlogic/proxer-manage -->
+<!-- mcp-name: io.github.standardlogic/surro-manage -->
 
-[![npm version](https://img.shields.io/npm/v/proxer-mcp)](https://www.npmjs.com/package/proxer-mcp)
+[![npm version](https://img.shields.io/npm/v/surro-mcp)](https://www.npmjs.com/package/surro-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-green)](https://modelcontextprotocol.io)
 
 **The trust layer for AI agents.** Gates protect your tools. Passports authorize your agents. Everything verified locally.
 
-MCP server for managing the [Proxer](https://proxer.dev) trust infrastructure — gates, passports, catalogs, constraints, enforcement, commerce, and billing — directly from Claude, Cursor, or any MCP client.
+MCP server for managing the [Surro](https://surro.io) trust infrastructure — gates, passports, catalogs, constraints, enforcement, commerce, and billing — directly from Claude, Cursor, or any MCP client.
 
 ---
 
-## What is Proxer?
+## What is Surro?
 
-[Proxer](https://proxer.dev) is an open protocol that adds a lightweight trust layer for the agentic web. It has two sides:
+[Surro](https://surro.io) is an open protocol that adds a lightweight trust layer for the agentic web. It has two sides:
 
 **Gates** protect your tools, APIs, and MCP servers. A Gate is a verification checkpoint — you define a permission catalog of what's allowed, and incoming agent requests are checked against it locally, with no network round-trip. Every decision produces a signed attestation for a tamper-evident audit trail.
 
@@ -22,13 +22,13 @@ MCP server for managing the [Proxer](https://proxer.dev) trust infrastructure �
 
 This MCP server lets you manage both sides conversationally from any MCP client.
 
-> [Protocol specification](https://github.com/uniplexprotocol/uniplex) · [Documentation](https://proxer.dev) · [MCP SDK (TypeScript)](https://www.npmjs.com/package/proxer-mcp-sdk) · [MCP SDK (Python)](https://pypi.org/project/proxer-mcp-sdk/)
+> [Protocol specification](https://github.com/uniplexprotocol/uniplex) · [Documentation](https://surro.io) · [MCP SDK (TypeScript)](https://www.npmjs.com/package/surro-mcp-sdk) · [MCP SDK (Python)](https://pypi.org/project/surro-mcp-sdk/)
 
 ---
 
 ## Prerequisites
 
-- A **Proxer account** — sign up at the [Proxer Dashboard](https://proxer.dev)
+- A **Surro account** — sign up at the [Surro Dashboard](https://surro.io)
 - **Claude Desktop**, **Claude Code**, **Cursor**, or any MCP-compatible client
 - An **API key** — generate one from the dashboard
 
@@ -38,7 +38,7 @@ This MCP server lets you manage both sides conversationally from any MCP client.
 
 ### Connect with API Key (Claude Desktop, any MCP client)
 
-Add Proxer to your MCP configuration:
+Add Surro to your MCP configuration:
 
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
@@ -46,11 +46,11 @@ Add Proxer to your MCP configuration:
 ```json
 {
   "mcpServers": {
-    "proxer": {
+    "surro": {
       "command": "npx",
-      "args": ["proxer-mcp"],
+      "args": ["surro-mcp"],
       "env": {
-        "PROXER_API_KEY": "uni_live_xxxxxxxx"
+        "SURRO_API_KEY": "uni_live_xxxxxxxx"
       }
     }
   }
@@ -60,10 +60,10 @@ Add Proxer to your MCP configuration:
 ### Add to Claude Code
 
 ```bash
-claude mcp add proxer \
+claude mcp add surro \
   --scope user \
-  -- npx proxer-mcp \
-  --env PROXER_API_KEY=uni_live_xxxxxxxx
+  -- npx surro-mcp \
+  --env SURRO_API_KEY=uni_live_xxxxxxxx
 ```
 
 Restart your client and you're ready to go.
@@ -178,8 +178,8 @@ Restart your client and you're ready to go.
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `PROXER_API_KEY` | Yes | — | Your Proxer API key (`uni_live_*` or `uni_test_*`) |
-| `PROXER_API_URL` | No | `https://proxer.dev` | API base URL (override for local dev) |
+| `SURRO_API_KEY` | Yes | — | Your Surro API key (`uni_live_*` or `uni_test_*`) |
+| `SURRO_API_URL` | No | `https://surro.io` | API base URL (override for local dev) |
 
 ---
 
@@ -190,12 +190,12 @@ For local testing against a development dashboard:
 ```json
 {
   "mcpServers": {
-    "proxer": {
+    "surro": {
       "command": "npx",
-      "args": ["proxer-mcp"],
+      "args": ["surro-mcp"],
       "env": {
-        "PROXER_API_URL": "http://localhost:3000",
-        "PROXER_API_KEY": "uni_test_xxxxxxxx"
+        "SURRO_API_URL": "http://localhost:3000",
+        "SURRO_API_KEY": "uni_test_xxxxxxxx"
       }
     }
   }
@@ -213,18 +213,18 @@ Make sure you've restarted Claude Desktop after editing the config file. Check f
 Verify your key starts with `uni_live_` (production) or `uni_test_` (development) and hasn't been revoked.
 
 **Tools aren't showing up**
-Run `npx proxer-mcp` directly in your terminal to check for startup errors. Ensure Node.js 18+.
+Run `npx surro-mcp` directly in your terminal to check for startup errors. Ensure Node.js 18+.
 
 ---
 
 ## Learn More
 
-- [Proxer Dashboard](https://proxer.dev) — Create your account and manage gates, passports, and API keys
+- [Surro Dashboard](https://surro.io) — Create your account and manage gates, passports, and API keys
 - [Protocol Specification](https://github.com/uniplexprotocol/uniplex)
-- [Documentation & Guides](https://proxer.dev)
-- [MCP SDK (TypeScript)](https://www.npmjs.com/package/proxer-mcp-sdk) · [MCP SDK (Python)](https://pypi.org/project/proxer-mcp-sdk/)
-- [Management SDK (Python)](https://pypi.org/project/proxer-mcp/)
-- [Discussions](https://github.com/StandardLogic/proxer-mcp/discussions) — Questions and ideas
+- [Documentation & Guides](https://surro.io)
+- [MCP SDK (TypeScript)](https://www.npmjs.com/package/surro-mcp-sdk) · [MCP SDK (Python)](https://pypi.org/project/surro-mcp-sdk/)
+- [Management SDK (Python)](https://pypi.org/project/surro-mcp/)
+- [Discussions](https://github.com/StandardLogic/surro-mcp/discussions) — Questions and ideas
 
 ---
 

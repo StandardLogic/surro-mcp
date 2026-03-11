@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * Proxer Management MCP Server
+ * Surro Management MCP Server
  *
- * A thin adapter that exposes Proxer Dashboard operations as MCP tools.
+ * A thin adapter that exposes Surro Dashboard operations as MCP tools.
  * Enables developers to manage issuers, passports, and gates directly from Claude.
  *
  * Usage:
- *   PROXER_API_KEY=sk_xxx npx proxer-mcp
- *   PROXER_API_KEY=uni_xxx npx proxer-mcp
+ *   SURRO_API_KEY=sk_xxx npx surro-mcp
+ *   SURRO_API_KEY=uni_xxx npx surro-mcp
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -22,32 +22,32 @@ import { ApiClient } from './api-client.js';
 import { allTools, handleToolCall } from './tools/index.js';
 
 // Configuration from environment
-const PROXER_API_URL = process.env.PROXER_API_URL || 'https://proxer.dev';
-const PROXER_API_KEY = process.env.PROXER_API_KEY;
+const SURRO_API_URL = process.env.SURRO_API_URL || 'https://surro.io';
+const SURRO_API_KEY = process.env.SURRO_API_KEY;
 
 async function main() {
   // Validate configuration
-  if (!PROXER_API_KEY) {
-    console.error('Error: PROXER_API_KEY environment variable is required');
+  if (!SURRO_API_KEY) {
+    console.error('Error: SURRO_API_KEY environment variable is required');
     console.error('');
     console.error('Usage:');
-    console.error('  PROXER_API_KEY=sk_xxx npx proxer-mcp');
+    console.error('  SURRO_API_KEY=sk_xxx npx surro-mcp');
     console.error('');
     console.error('Or for local development:');
-    console.error('  PROXER_API_KEY=uni_xxx npx proxer-mcp');
+    console.error('  SURRO_API_KEY=uni_xxx npx surro-mcp');
     process.exit(1);
   }
 
   // Initialize API client
   const api = new ApiClient({
-    baseUrl: PROXER_API_URL,
-    apiKey: PROXER_API_KEY,
+    baseUrl: SURRO_API_URL,
+    apiKey: SURRO_API_KEY,
   });
 
   // Create MCP server
   const server = new Server(
     {
-      name: 'proxer-manage',
+      name: 'surro-manage',
       version: '1.1.0',
     },
     {
@@ -97,9 +97,9 @@ async function main() {
   await server.connect(transport);
 
   // Log to stderr (stdout is reserved for MCP protocol)
-  console.error(`Proxer Management MCP Server started`);
-  console.error(`  API URL: ${PROXER_API_URL}`);
-  console.error(`  API Key: ${PROXER_API_KEY.slice(0, 10)}...`);
+  console.error(`Surro Management MCP Server started`);
+  console.error(`  API URL: ${SURRO_API_URL}`);
+  console.error(`  API Key: ${SURRO_API_KEY.slice(0, 10)}...`);
 }
 
 main().catch((error) => {

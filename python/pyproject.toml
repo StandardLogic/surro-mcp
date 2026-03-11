@@ -3,17 +3,17 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "proxer-mcp"
+name = "surro-mcp"
 version = "1.1.0"
-description = "Python SDK for the Proxer trust infrastructure platform"
+description = "Python SDK for the Surro trust infrastructure platform"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
-    { name = "Standard Logic Co.", email = "support@proxer.dev" },
+    { name = "Standard Logic Co.", email = "support@surro.io" },
 ]
 keywords = [
-    "proxer",
+    "surro",
     "ai-agents",
     "permissions",
     "passports",
@@ -47,12 +47,12 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://proxer.dev"
-Documentation = "https://proxer.dev/guide"
-Repository = "https://github.com/StandardLogic/proxer-mcp"
+Homepage = "https://surro.io"
+Documentation = "https://surro.io/guide"
+Repository = "https://github.com/StandardLogic/surro-mcp"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/proxer"]
+packages = ["src/surro"]

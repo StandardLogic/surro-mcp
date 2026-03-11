@@ -11,12 +11,12 @@ from .exceptions import (
     AuthorizationError,
     ConflictError,
     NotFoundError,
-    ProxerError,
+    SurroError,
     RateLimitError,
     ValidationError,
 )
 
-DEFAULT_BASE_URL = "https://proxer.dev"
+DEFAULT_BASE_URL = "https://surro.io"
 DEFAULT_TIMEOUT = 30.0
 
 
@@ -52,7 +52,7 @@ def _raise_for_status(response: httpx.Response) -> None:
     if response.status_code in (400, 422):
         raise ValidationError(message, **kwargs)
 
-    raise ProxerError(message, **kwargs)
+    raise SurroError(message, **kwargs)
 
 
 def _parse_response(response: httpx.Response) -> Any:

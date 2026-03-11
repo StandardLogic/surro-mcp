@@ -1,4 +1,4 @@
-"""Pydantic v2 models for the Proxer API."""
+"""Pydantic v2 models for the Surro API."""
 
 from __future__ import annotations
 

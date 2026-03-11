@@ -1,4 +1,4 @@
-"""Asynchronous Proxer client using httpx."""
+"""Asynchronous Surro client using httpx."""
 
 from __future__ import annotations
 
@@ -44,12 +44,12 @@ from .types import (
 )
 
 
-class AsyncProxerClient:
-    """Asynchronous client for the Proxer REST API.
+class AsyncSurroClient:
+    """Asynchronous client for the Surro REST API.
 
     Args:
-        api_key: Proxer API key (e.g. ``uni_live_xxx``).
-        base_url: API base URL. Defaults to ``https://proxer.dev``.
+        api_key: Surro API key (e.g. ``uni_live_xxx``).
+        base_url: API base URL. Defaults to ``https://surro.io``.
         timeout: Request timeout in seconds. Defaults to 30.
     """
 
@@ -72,7 +72,7 @@ class AsyncProxerClient:
         """Close the underlying HTTP client."""
         await self._client.aclose()
 
-    async def __aenter__(self) -> AsyncProxerClient:
+    async def __aenter__(self) -> AsyncSurroClient:
         return self
 
     async def __aexit__(self, *args: Any) -> None:

@@ -1,4 +1,4 @@
-"""Synchronous Proxer client using httpx."""
+"""Synchronous Surro client using httpx."""
 
 from __future__ import annotations
 
@@ -44,12 +44,12 @@ from .types import (
 )
 
 
-class ProxerClient:
-    """Synchronous client for the Proxer REST API.
+class SurroClient:
+    """Synchronous client for the Surro REST API.
 
     Args:
-        api_key: Proxer API key (e.g. ``uni_live_xxx``).
-        base_url: API base URL. Defaults to ``https://proxer.dev``.
+        api_key: Surro API key (e.g. ``uni_live_xxx``).
+        base_url: API base URL. Defaults to ``https://surro.io``.
         timeout: Request timeout in seconds. Defaults to 30.
     """
 
@@ -72,7 +72,7 @@ class ProxerClient:
         """Close the underlying HTTP client."""
         self._client.close()
 
-    def __enter__(self) -> ProxerClient:
+    def __enter__(self) -> SurroClient:
         return self
 
     def __exit__(self, *args: Any) -> None:
